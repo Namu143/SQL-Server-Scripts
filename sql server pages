@@ -1,0 +1,9 @@
+-- See how many pages your table uses
+SELECT 
+ OBJECT_NAME(ps.object_id) AS TableName,
+ ps.index_id,
+ ps.index_type_desc,
+ ps.page_count,
+ ps.avg_page_space_used_in_percent
+FROM sys.dm_db_index_physical_stats(DB_ID(), NULL, NULL, NULL, 'DETAILED') ps
+ORDER BY ps.page_count DESC;
